@@ -2,7 +2,9 @@
 const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const packageConfig = require('../package.json')
+const fs = require('fs')
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -99,3 +101,37 @@ exports.createNotifierCallback = () => {
     })
   }
 }
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+function getEntries(pageDir, entryPath) {
+  const entries = {}
+  const pageDirPath = resolve(pageDir)
+  fs.readdirSync(pageDirPath) // 发现文件夹，就认为是页面模块
+    .forEach(function (fold) {
+      entries[fold] = [pageDir, fold, entryPath].join('/')
+    })
+  return entries
+}
+
+function setMultipagePlugin(pageDir, entryPath, htmlOptions) {
+  const pages = getEntries(pageDir, entryPath)
+  const webpackConfig = {
+    plugins: []
+  }
+  for (let pathname in pages) {
+    const opt = Object.assign({}, {
+      filename: pathname + '/index.html',
+      template: pages[pathname],
+      chunks: ['manifest', 'vendor', pathname]
+    }, htmlOptions)
+    // https://github.com/ampedandwired/html-webpack-plugin
+    webpackConfig.plugins.push(new HtmlWebpackPlugin(opt))
+  }
+  return webpackConfig
+}
+
+exports.getEntries = getEntries
+exports.setMultipagePlugin = setMultipagePlugin

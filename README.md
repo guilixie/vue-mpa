@@ -2,6 +2,9 @@
 
 > A Vue.js multiple pages application
 
+## Instructions
+> vue-cli：2.9.3
+
 ## Build Setup
 
 ``` bash

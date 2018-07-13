@@ -1,15 +1,20 @@
 <template>
   <div class="hello">
     {{msg}}
+    <hello />
   </div>
 </template>
 
 <script>
+import Hello from '@/components/HelloWorld'
 export default {
-  name: 'HelloWorld',
+  name: 'Index',
+  components: {
+    Hello
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'This is pageTwo!'
     }
   }
 }
@@ -18,8 +23,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hello{
-  font-size: 30px;
-  font-weight: 600;
-  color: orange;
+  color: blue;
 }
 </style>
