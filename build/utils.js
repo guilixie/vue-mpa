@@ -126,7 +126,7 @@ function setMultipagePlugin(pageDir, entryPath, htmlOptions) {
   }
   for (let pathname in pages) {
     const opt = Object.assign({}, {
-      filename: pathname + '/index.html',
+      filename: pathname + '.html',
       template: pages[pathname],
       chunks: ['manifest', 'vendor', pathname]
     }, htmlOptions)
