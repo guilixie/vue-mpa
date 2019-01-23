@@ -22,9 +22,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 
 ## 步骤
-1.核心方法
-2.webpack.base.conf entry
-3.webpack.dev.conf.js HtmlWebpackPlugin
-4.webpack.prod.conf.js HtmlWebpackPlugin
-
-5.配置项提取
+  1. 核心方法
+  2. webpack.base.conf entry
+  3. webpack.dev.conf.js HtmlWebpackPlugin
+  4. webpack.prod.conf.js HtmlWebpackPlugin
+  5.  配置项提取
