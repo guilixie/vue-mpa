@@ -111,7 +111,7 @@ const webpackConfig = {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: path.resolve(__dirname, '../public'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
@@ -142,23 +142,6 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/views/', 'index.html',
-  // generate dist index.html with correct asset hash for caching.
-  // you can customize output by editing /index.html
-  // see https://github.com/ampedandwired/html-webpack-plugin
-  {
-    inject: true,
-    minify: {
-      removeComments: true,
-      collapseWhitespace: true,
-      removeAttributeQuotes: true,
-      minifyJS: true,
-      minifyCSS: true
-      // more options:
-      // https://github.com/kangax/html-minifier#options-quick-reference
-    },
-    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-    chunksSortMode: 'dependency'
-  })
+const multiWebpackConfig = utils.setMultipagePlugin('production')
 
 module.exports = merge(baseWebpackConfig, multiWebpackConfig, webpackConfig)

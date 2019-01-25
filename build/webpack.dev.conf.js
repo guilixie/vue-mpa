@@ -60,7 +60,7 @@ const webpackConfig = {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(__dirname, '../static'),
+        from: path.resolve(__dirname, '../public'),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
@@ -68,9 +68,7 @@ const webpackConfig = {
   ]
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/views', 'index.html', {
-  inject: true
-})
+const multiWebpackConfig = utils.setMultipagePlugin('development')
 
 const devWebpackConfig = merge(baseWebpackConfig, multiWebpackConfig, webpackConfig)
 
