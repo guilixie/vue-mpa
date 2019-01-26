@@ -12,7 +12,7 @@ const defaultOpt = {
     template: './public/index.html',
     filename: 'index.html',
     favicon: './public/favicon.ico',
-    chunks: ['manifest', 'vendor', 'admin']
+    chunks: ['manifest', 'vendor', 'app']
   }
 }
 
