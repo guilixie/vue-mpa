@@ -4,33 +4,37 @@ const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const packageConfig = require('../package.json')
-/* const fs = require('fs')
+const fs = require('fs')
 
 const defaultOpt = {
-  entry: 'main.js',
-  tmpl: 'index.html',
-  root: 'src'
-} */
+  entry: './src/main.js',
+  plugin: {
+    template: './public/index.html',
+    filename: 'index.html',
+    favicon: './public/favicon.ico',
+    chunks: ['manifest', 'vendor', 'admin']
+  }
+}
 
 const htmlPluginOpt = {
   production:
-    // generate dist index.html with correct asset hash for caching.
-    // you can customize output by editing /index.html
-    // see https://github.com/ampedandwired/html-webpack-plugin
-    {
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true,
-        minifyJS: true,
-        minifyCSS: true
-        // more options:
-        // https://github.com/kangax/html-minifier#options-quick-reference
-      },
-      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+  // generate dist index.html with correct asset hash for caching.
+  // you can customize output by editing /index.html
+  // see https://github.com/ampedandwired/html-webpack-plugin
+  {
+    inject: true,
+    minify: {
+      removeComments: true,
+      collapseWhitespace: true,
+      removeAttributeQuotes: true,
+      minifyJS: true,
+      minifyCSS: true
+      // more options:
+      // https://github.com/kangax/html-minifier#options-quick-reference
     },
+    // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+    chunksSortMode: 'dependency'
+  },
   development: {
     inject: true
   }
@@ -143,51 +147,36 @@ function getEntries () {
 }
 
 function setMultipagePlugin (mode = process.env.NODE_ENV) {
-  console.log(mode)
   const webpackConfig = {
     plugins: []
   }
-  for (let plugin in pageConfig.plugins) {
+  pageConfig.plugins.forEach(function (plugin) {
     const opt = Object.assign({}, plugin, htmlPluginOpt[mode])
-    // https://github.com/ampedandwired/html-webpack-plugin
-    webpackConfig.plugins.push(new HtmlWebpackPlugin(opt))
-  }
-  console.log(webpackConfig)
+    webpackConfig.plugins.push(new HtmlWebpackPlugin(opt)) // https://github.com/ampedandwired/html-webpack-plugin
+  })
   return webpackConfig
 }
 
 function getVueConfig () {
-  // const path = resolve('vue.config.js')
+  const path = resolve('vue.config.js')
   const ret = {
     entries: {},
     plugins: []
   }
-  /* fs.readFile(path, 'utf8', function (err, data) {
-    console.log(err, data)
-    const vueConfig = JSON.parse(data)
+  try {
+    fs.readFileSync(path, 'utf8')
+    const vueConfig = require(path)
     for (let key in vueConfig.pages) {
       const tmp = vueConfig.pages[key]
       ret.entries[key] = tmp.entry
-      ret.plugins.push({
-        template: tmp.template,
-        filename: tmp.filename,
-        title: tmp.title,
-        chunks: tmp.chunks
-      })
+      delete tmp.entry
+      ret.plugins.push(tmp)
     }
-  }) */
-  const vueConfig = require('../vue.config')
-  for (let key in vueConfig.pages) {
-    const tmp = vueConfig.pages[key]
-    ret.entries[key] = `./${tmp.entry}`
-    ret.plugins.push({
-      template: `./${tmp.template}`,
-      filename: tmp.filename,
-      title: tmp.title,
-      chunks: tmp.chunks
-    })
+  } catch (err) {
+    if (err.toString().indexOf('no such file or directory') === -1) throw err
+    ret.entries.app = defaultOpt.entry
+    ret.plugins = [defaultOpt.plugin]
   }
-  console.log(ret)
   return ret
 }
 

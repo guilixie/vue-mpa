@@ -28,8 +28,8 @@ export default {
   computed: {
     routeConfig () {
       const map = {
-        admin: 'home',
-        home: 'admin'
+        admin: 'index',
+        index: 'admin'
       }
       return {
         url: `/${map[this.name]}.html`,

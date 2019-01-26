@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <hello name="home"/>
+    <hello name="index"/>
     <table-show :head-data="headData" :data="data" />
   </div>
 </template>
