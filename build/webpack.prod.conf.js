@@ -142,7 +142,7 @@ if (config.build.bundleAnalyzerReport) {
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
-const multiWebpackConfig = utils.setMultipagePlugin('./src/views/', 'index.html',
+const multiWebpackConfig = utils.setMultipagePlugin('./src/views', 'index.html',
   // generate dist index.html with correct asset hash for caching.
   // you can customize output by editing /index.html
   // see https://github.com/ampedandwired/html-webpack-plugin
