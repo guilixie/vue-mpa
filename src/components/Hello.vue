@@ -27,12 +27,15 @@ export default {
   },
   computed: {
     routeConfig () {
+      const pathArr = window.location.pathname.split('/')
+      // eslint-disable-next-line
+      const [ path, ...prefix ] = pathArr.reverse()
       const map = {
         admin: 'index',
         index: 'admin'
       }
       return {
-        url: `/${map[this.name]}.html`,
+        url: `${prefix.join('/')}/${map[this.name]}.html`,
         label: `跳转到${map[this.name]}`
       }
     }
