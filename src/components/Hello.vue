@@ -2,7 +2,6 @@
   <div class="hello">
     <h1 class="color-blue">Hello, {{ name }}</h1>
     <h2 class="color-green">{{ msg }}</h2>
-    <h3>Project examples</h3>
   </div>
 </template>
 
