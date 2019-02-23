@@ -144,6 +144,11 @@ const htmlPluginOpt = {
 }
 
 const pageConfig = getVueConfig()
+
+function getEntries () {
+  return pageConfig.entries
+}
+
 function setMultipagePlugin (mode = process.env.NODE_ENV) {
   const webpackConfig = {
     plugins: []
