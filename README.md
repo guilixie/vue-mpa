@@ -192,4 +192,4 @@ exports.setMultipagePlugin = setMultipagePlugin
 ---
 
 ## 四、总结
-&emsp;&emsp;想当初jQuery盛行的年代，web项目大多采用多页面（mpa）架构，而目前主流趋势都是采用单页面（spa）模式。尽管如此，多页面模式也是需要的，特别是移动端开发。根据单一职责原理，将复杂的业务单一化，降低耦合度，同时可以减少各单页面的复杂度，有利于后期的维护和嵌套在不同容器中。当然配置文件还可以提取很多配置项，这个官方出的 <a href="https://cli.vuejs.org/zh/" target="_blank">`vue-cli 3`</a> 脚手架可以很方便地使用。
+&emsp;&emsp;想当初jQuery盛行的年代，web项目大多采用多页面（mpa）架构，而目前主流趋势都是采用单页面（spa）模式。尽管如此，多页面模式也是需要的，特别是移动端开发。将复杂的业务单一化，降低耦合度，同时可以减少各单页面的复杂度，有利于后期的维护和嵌套在不同容器中。当然配置文件还可以提取很多配置项，这个官方出的 <a href="https://cli.vuejs.org/zh/" target="_blank">`vue-cli 3`</a> 脚手架可以很方便地使用。
