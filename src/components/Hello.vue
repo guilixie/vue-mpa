@@ -2,17 +2,6 @@
   <div class="hello">
     <h1 class="color-blue">Hello, {{ name }}</h1>
     <h2 class="color-green">{{ msg }}</h2>
-    <h3>Project examples</h3>
-    <ul>
-      <li>
-        <a
-          :href="routeConfig.url"
-          target="_blank"
-        >
-        {{routeConfig.label}}
-        </a>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -23,21 +12,6 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
-    }
-  },
-  computed: {
-    routeConfig () {
-      const pathArr = window.location.pathname.split('/')
-      // eslint-disable-next-line
-      const [ path, ...prefix ] = pathArr.reverse()
-      const map = {
-        admin: 'index',
-        index: 'admin'
-      }
-      return {
-        url: `${prefix.join('/')}/${map[this.name]}.html`,
-        label: `跳转到${map[this.name]}`
-      }
     }
   }
 }
